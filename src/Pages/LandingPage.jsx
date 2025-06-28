@@ -161,10 +161,10 @@ const LandingPage = () => {
         <Sparkles className="w-16 h-16 text-purple-600 dark:text-purple-400 mx-auto mb-8" />
         <div className="text-center max-w-8xl">
             <h1 className="sm:text-3xl text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">More Than a Project—It's a Purpose</h1>
-            <p className="sm:text-lg text-xl text-gray-600 dark:text-gray-300 leading-relaxed">Tales of the Day was born from the desire to give every moment a voice. We believe in the power of reflection, the beauty of everyday stories, and the importance of preserving your personal growth journey.</p>
+            <p className="justify-self-center max-w-2xl sm:text-lg text-xl text-gray-600 dark:text-gray-300 leading-relaxed">Tales of the Day was born from the desire to give every moment a voice. We believe in the power of reflection, the beauty of everyday stories, and the importance of preserving your personal growth journey.</p>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 justify-self-center  gap-6 m-10 text-center">
+        <div className="mt-10 grid grid-cols-1 lg:grid-cols-2 justify-self-center lg:w-1/2 gap-6 m-10 text-center">
             {cardData1.map((item,index)=>(
                 <Card
                     key={index}
