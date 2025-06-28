@@ -1,0 +1,16 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer utilities {
+  .wheat {
+    background-color: #F5DEB3;
+  }
+
+  .text-wheat {
+    color: #F5DEB3;
+  }
+
+  .border-wheat {
+    border-color: #F5DEB3;
+  }
+}
