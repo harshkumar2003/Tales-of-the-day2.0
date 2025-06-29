@@ -9,8 +9,7 @@ lerna-debug.log*
 
 .env
 .env.*
-firebaseConfig.js
-src/utils/firebaseConfig.js
+
 
 node_modules
 dist
