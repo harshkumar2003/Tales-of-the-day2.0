@@ -1,11 +1,12 @@
 import { useState } from "react";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
-import { auth , db} from "../utils/firebaseConfig";
+import { auth, db } from "../utils/firebaseConfig";
 import { Link } from "react-router-dom";
 import Login_Singuppage from "../Components/Login_Singuppage";
 import InputForm from "../Components/InputForm";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 const Signup = () => {
   const reqinput = [
     { label: "Full Name", type: "text", name: "fullName" },
@@ -19,35 +20,48 @@ const Signup = () => {
     },
   ];
 
-  const [formData,setFormData] = useState({
-    fullName:"",
-    email:"",
-    password:"",
+  const [formData, setFormData] = useState({
+    fullName: "",
+    email: "",
+    password: "",
   });
   const navigate = useNavigate();
-  const handleChange = (e)=>{
-
+  const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-    const handleSignUp= async()=>{
-        const {fullName,email,password} = formData;
-        try{
-            const userCredential = await createUserWithEmailAndPassword(auth,email,password);
-            const user = userCredential.user;
-            await setDoc(doc(db,"users",user.uid),{
-                fullName,
-                email,
-                createdAt: new Date(),
-            });
-            alert("done")
-            navigate("/login")
-        }
-        catch(error)
-        {
-            alert(error.message);
-        }
-    };
+  const handleSignUp = async () => {
+    const { fullName, email, password } = formData;
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      await setDoc(doc(db, "users", user.uid), {
+        fullName,
+        email,
+        createdAt: new Date(),
+      });
+      toast.success("Signed in successfully!", {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+      navigate("/dashboard");
+    } catch (error) {
+      toast.error(error.message || "Something went wrong!", {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+    }
+  };
 
   return (
     <>
@@ -72,8 +86,8 @@ const Signup = () => {
                 label={item.label}
                 name={item.name}
                 type={item.type}
-                value={formData[item.name]} 
-                onChange={handleChange}     
+                value={formData[item.name]}
+                onChange={handleChange}
               />
             ))}
             <p className="mt-4 text-sm text-gray-600 dark:text-gray-400 text-center">

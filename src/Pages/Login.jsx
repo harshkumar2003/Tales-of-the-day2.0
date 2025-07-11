@@ -1,11 +1,13 @@
-import {useState} from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import Login_Singuppage from "../Components/Login_Singuppage";
 import { useNavigate } from "react-router-dom";
 import InputForm from "../Components/InputForm";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { doc, getDoc, setDoc } from "firebase/firestore";
-import { auth ,db } from "../utils/firebaseConfig";
+import { auth, db } from "../utils/firebaseConfig";
+import toast, { Toaster } from "react-hot-toast";
+
 const Login = () => {
   const reqinput = [
     { label: "Email", type: "email", name: "email" },
@@ -23,37 +25,49 @@ const Login = () => {
     password: "",
   });
   const navigate = useNavigate();
- const onChange = (e) => {
+  const onChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-
   const handleLogin = async () => {
-    const{email,password} = formData;
-    try
-    {
-        const userCredential = await signInWithEmailAndPassword(auth,email,password);
-        const user = userCredential.user;
+    const { email, password } = formData;
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+
+      const userDocRef = doc(db, "users", user.uid);
+      const userDoc = await getDoc(userDocRef);
+      var userId;
+      if (userDoc.exists()) {
+        userId = user.uid;
+      }
+      // alert();
+      toast.success("Signed in successfully!", {
         
-        const userDocRef = doc(db,"users" ,user.uid);
-        const userDoc = await getDoc(userDocRef);
-        var userId;
-        if(userDoc.exists())
-        {
-            userId = user.uid;
-        }
-        alert("Signed in successfully!");
-        navigate("/dashboard");
-    }
-    catch(error)
-    { 
-      alert(error.message);
-      console.error("Login error:", error);
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+      navigate("/dashboard");
+    } catch (error) 
+    {
+
+      toast.error(error.message || "Something went wrong!", {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+      // console.error("Login error:", error);
     }
   };
-
-
-
 
   return (
     <>
@@ -93,7 +107,7 @@ const Login = () => {
             </p>
 
             <button
-            type="submit"
+              type="submit"
               onClick={handleLogin}
               className="mt-4 w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 rounded-4xl p-2 text-white font-bold "
             >
