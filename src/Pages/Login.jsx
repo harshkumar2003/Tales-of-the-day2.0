@@ -47,7 +47,6 @@ const Login = () => {
       }
       // alert();
       toast.success("Signed in successfully!", {
-        
         style: {
           borderRadius: "10px",
           background: "#333",
@@ -55,9 +54,7 @@ const Login = () => {
         },
       });
       navigate("/dashboard");
-    } catch (error) 
-    {
-
+    } catch (error) {
       toast.error(error.message || "Something went wrong!", {
         style: {
           borderRadius: "10px",
@@ -96,6 +93,14 @@ const Login = () => {
                 onChange={onChange}
               />
             ))}
+            <div className="text-right mb-4">
+              <Link
+                to="/forgot-password"
+                className="text-sm text-blue-600 dark:text-blue-400 hover:underline transition"
+              >
+                Forgot Password?
+              </Link>
+            </div>
             <p className="mt-4 text-sm text-gray-600 dark:text-gray-400 text-center">
               Don’t have an account?{" "}
               <Link

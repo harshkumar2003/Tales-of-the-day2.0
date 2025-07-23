@@ -1,5 +1,3 @@
-
-
 import { useEffect, useState } from "react";
 import { confirmPasswordReset } from "firebase/auth";
 import { auth } from "../utils/firebaseConfig";
@@ -16,7 +14,7 @@ const ResetPassword = () => {
   useEffect(() => {
     const code = params.get("oobCode");
     if (!code) {
-      toast.error("Invalid reset link.");
+      toast.error("Invalid or expired link.");
       navigate("/");
     } else {
       setOobCode(code);
@@ -32,38 +30,41 @@ const ResetPassword = () => {
 
     try {
       await confirmPasswordReset(auth, oobCode, password);
-      toast.success("Password has been reset. Please login.");
+      toast.success("Password reset successful. You may now login.");
       navigate("/login");
     } catch (err) {
-      toast.error("Reset failed. Try again.");
+      toast.error("Password reset failed. Try again.");
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-violet-100 to-indigo-200 flex items-center justify-center px-4">
-      <div className="bg-white shadow-lg rounded-xl p-8 max-w-md w-full">
-        <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">Reset Your Password</h2>
+    <div className="min-h-screen bg-gradient-to-br from-violet-100 via-indigo-100 to-purple-200 flex items-center justify-center px-4">
+      <div className="bg-white/90 backdrop-blur shadow-2xl rounded-2xl p-10 max-w-md w-full">
+        <h1 className="text-3xl font-bold text-center mb-4 text-gray-800">Reset Your Password</h1>
+        <p className="text-center text-sm text-gray-600 mb-6 italic">
+          Begin a new chapter. Enter your new password below.
+        </p>
 
-        <form onSubmit={handleReset}>
+        <form onSubmit={handleReset} className="space-y-4">
           <input
             type="password"
             placeholder="New Password"
-            className="w-full mb-4 px-4 py-2 border rounded focus:outline-none"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
           />
           <input
             type="password"
             placeholder="Confirm Password"
-            className="w-full mb-4 px-4 py-2 border rounded focus:outline-none"
             value={confirm}
             onChange={(e) => setConfirm(e.target.value)}
             required
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
           />
           <button
             type="submit"
-            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-2 rounded"
+            className="w-full py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg font-semibold"
           >
             Reset Password
           </button>
