@@ -40,9 +40,9 @@ const Navbar = () => {
       <div className="flex justify-between items-center md:ml-6 md:mr-6">
         <div className="flex justify-between items-center space-x-3 ">
           <BookOpen className="h-6 w-6 text-purple-600 dark:text-purple-400 items-center" />
-          <h1 className="text-xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+          <Link to="/Dashboard"><h1 className="text-xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
             Tales Of the Day
-          </h1>
+          </h1></Link>
         </div>
         <div className="flex  items-center space-x-3">
           <ThemeToggle />
@@ -51,14 +51,14 @@ const Navbar = () => {
               
               <button
                 onClick={handleLogout}
-                className="text-white p-3 rounded-full font-bold bg-gradient-to-r from-red-500 to-red-700 hover:from-red-600 hover:to-red-800"
+                className="cursor-pointer text-white p-3 rounded-full font-bold bg-gradient-to-r from-red-500 to-red-700 hover:from-red-600 hover:to-red-800"
               >
                 <LogOut />
               </button>
             </>
           ) : (
             <Link to="/login">
-              <button className="text-white p-3 rounded-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
+              <button className="cursor-pointer text-white p-3 rounded-2xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700">
                 Get Started
               </button>
             </Link>

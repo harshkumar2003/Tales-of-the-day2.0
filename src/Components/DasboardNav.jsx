@@ -14,7 +14,7 @@ function DasboardNav({ activeTab, setActiveTab }) {
           <button
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
-            className={`flex items-center gap-2 px-4 py-2 rounded-2xl font-bold bg-gradient-to-r transition-all duration-200 ${
+            className={`cursor-pointer flex items-center gap-2 px-4 py-2 rounded-2xl font-bold bg-gradient-to-r transition-all duration-200 ${
               activeTab === tab.key
                 ? 'from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white'
                 : 'from-gray-200 to-gray-300 dark:from-gray-700 dark:to-gray-800 text-black dark:text-white'

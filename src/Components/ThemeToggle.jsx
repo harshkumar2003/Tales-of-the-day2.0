@@ -28,7 +28,7 @@ function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="p-3 rounded-full bg-white/10 hover:bg-white/20 transition"
+      className="cursor-pointer p-3 rounded-full bg-white/10 hover:bg-white/20 transition"
     >
       {theme === "dark" ? (
         <Sun className="text-yellow-400" />

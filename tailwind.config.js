@@ -1,12 +1,18 @@
-// tailwind.config.js
+/** @type {import('tailwindcss').Config} */
 export default {
-  darkMode: 'class', // 👈 required for manual dark mode toggle
   content: [
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        background: '#ffffff', // replace oklch with hex
+        primary: '#3b82f6',    // Tailwind blue-500 as hex
+        text: '#1f2937',       // Tailwind gray-800
+        // Add more if needed
+      },
+    },
   },
   plugins: [],
 }

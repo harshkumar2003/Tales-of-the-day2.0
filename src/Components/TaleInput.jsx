@@ -81,7 +81,7 @@ function TaleInput() {
 };
 
   return (
-    <div className="lg:w-1/2 mx-auto mt-10 backdrop-blur-md bg-white/80 dark:bg-[#0e0e0e]/90 text-gray-900 dark:text-gray-100 shadow-2xl rounded-2xl border border-white/30 dark:border-white/10">
+    <div className="lg:w-1/2 mx-auto mt-10 backdrop-blur-md bg-white/80 dark:bg-black/90 text-gray-900 dark:text-gray-100 shadow-2xl rounded-2xl border border-white/30 dark:border-white/10">
       <div className="flex flex-col p-4">
         <div className="text-center mb-4">
           <div className="flex space-x-3 justify-center mb-4">
@@ -97,14 +97,14 @@ function TaleInput() {
         <div className="flex gap-4 mt-4">
           <button
             onClick={() => setShowVoiceNote((prev) => !prev)}
-            className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold rounded-xl shadow-md transition-all duration-200"
+            className="cursor-pointer flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold rounded-xl shadow-md transition-all duration-200"
           >
             <Mic size={18} /> Voice Note
           </button>
 
-          <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-semibold rounded-xl shadow-md transition-all duration-200">
+          {/* <button className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-black font-semibold rounded-xl shadow-md transition-all duration-200">
             <Lightbulb size={18} /> Inspire Me
-          </button>
+          </button> */}
         </div>
 
         {/* Voice Note Recorder */}
@@ -139,7 +139,7 @@ function TaleInput() {
             </label>
             <button
               onClick={() => setOpen(!open)}
-              className="w-full flex justify-between items-center px-4 py-3 rounded-md bg-white/80 dark:bg-black/40 text-black dark:text-white border border-gray-300 dark:border-white/20 focus:outline-none focus:ring-2 focus:ring-purple-600 dark:focus:ring-purple-500"
+              className="cursor-pointer w-full flex justify-between items-center px-4 py-3 rounded-md bg-white/80 dark:bg-black/40 text-black dark:text-white border border-gray-300 dark:border-white/20 focus:outline-none focus:ring-2 focus:ring-purple-600 dark:focus:ring-purple-500"
             >
               {selected}
               <ChevronDown className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`} />
@@ -190,7 +190,7 @@ function TaleInput() {
         </p>
         <button onClick={handleSave}
           type="submit"
-          className="flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold shadow-lg transition duration-200"
+          className="cursor-pointer flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold shadow-lg transition duration-200"
         >
           <Save className="w-5 h-5" />
           Save Tale
