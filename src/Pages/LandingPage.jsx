@@ -15,7 +15,10 @@ import { Link } from "react-router-dom";
 import Card from "../Components/Card";
 import Navbar from "../Components/Navbar";
 import Footer from "../Components/Footer";
+import { useUser } from "../context/UserContext";
+
 const LandingPage = () => {
+  const { user, loading } = useUser();
   const cardData = [
     {
       icon: BookOpen,
@@ -98,12 +101,25 @@ const LandingPage = () => {
           </p>
 
           <div className=" flex items-center justify-center   text-white">
-            <Link to="/signup">
+            {user ? (
+              <>
+                            <Link to="/Dashboard">
+              <button className="flex items-center bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 px-6 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
+                Dashboard
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </button>
+            </Link>
+              </>
+            ):(
+              <>
+                            <Link to="/signup">
               <button className="flex items-center bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 px-6 py-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
                 Start Your Journey
                 <ArrowRight className="ml-2 h-5 w-5" />
               </button>
             </Link>
+              </>
+            )}
           </div>
         </div>
         <div className="grid grid-cols-1 md:grid md:grid-cols-3 gap-8 max-w-2xl mx-auto mt-8">
@@ -188,9 +204,20 @@ const LandingPage = () => {
                 <h1 className="pt-3 text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Your Story Starts Today</h1>
                 <p className="pt-4 p-4 text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">Every moment has a story. Every story has meaning. Start your journey of reflection, creativity, and emotional wellness.</p>
                 <div className="flex items-center justify-center pb-8">
-                    <Link to="/singup">
+                    {user ? (
+                      <>
+                        <Link to="/Dashboard">
+                    <button className="flex items-center bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-lg px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 text-white">Dashboard <ArrowRight className="ml-2 h-5 w-5" /></button>
+                </Link>
+                      </>
+                    ):
+                    (
+                      <>
+                        <Link to="/singup">
                     <button className="flex items-center bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-lg px-6 py-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 text-white">Begin Writing Your Tales <ArrowRight className="ml-2 h-5 w-5" /></button>
                 </Link>
+                      </>
+                    )}
                 </div>
             </div>
       </div>

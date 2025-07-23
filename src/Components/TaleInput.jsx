@@ -7,6 +7,9 @@ import {
 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import VoiceNote from "./VoiceNote";
+import { useUser } from "../context/UserContext";
+import { saveEncryptedTale } from "../services/taleService";
+import toast from "react-hot-toast";
 
 const categories = [
   "All categories",
@@ -30,6 +33,9 @@ function TaleInput() {
 
   const dropdownRef = useRef(null);
 
+  const { user } = useUser();
+
+
   useEffect(() => {
     const handler = (e) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
@@ -48,8 +54,31 @@ function TaleInput() {
 
   // 🎙️ Optional: Save blob somewhere later
   const handleAudioSave = (blob, dur) => {
-    console.log("Audio saved:", { dur, size: blob.size });
+    toast.success("Audio saved:", { dur, size: blob.size });
   };
+
+  const handleSave = async () => {
+  try {
+    if (!user) return alert("Login required");
+
+    await saveEncryptedTale(user.uid, {
+      title,
+      category: selected,
+      content,
+    });
+
+    toast.success("Tale saved securely ✨");
+
+    // Optional: Reset form
+    setTitle("");
+    setContent("");
+    setSelected("All categories");
+
+  } catch (err) {
+    toast.error("Error saving tale:", err.message);
+    // alert("Error saving tale. Check console.");
+  }
+};
 
   return (
     <div className="lg:w-1/2 mx-auto mt-10 backdrop-blur-md bg-white/80 dark:bg-[#0e0e0e]/90 text-gray-900 dark:text-gray-100 shadow-2xl rounded-2xl border border-white/30 dark:border-white/10">
@@ -159,7 +188,7 @@ function TaleInput() {
         <p className="text-sm text-gray-700 dark:text-gray-300">
           {content.length} characters
         </p>
-        <button
+        <button onClick={handleSave}
           type="submit"
           className="flex items-center gap-2 px-5 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-semibold shadow-lg transition duration-200"
         >

@@ -3,6 +3,8 @@ import React from "react";
 import { Hand } from "lucide-react";
 import { motion } from "motion/react";
 function UserWelcome({ user  }) {
+
+    console.log(user)
     const username = user.email.split('@')[0].replace(/[^a-zA-Z]/g," ")
   return (
     <div className="text-black dark:text-white flex items-center gap-2  justify-center pt-8">
