@@ -6,6 +6,7 @@ import Signup from "./Pages/Signup";
 import LandingPage from "./Pages/LandingPage";
 import { LoadingSpinner } from "./Components/LoadingSpinner";
 import Dashboard from "./Pages/Dashboard";
+import ResetPassword from "./Pages/ResetPassword";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import  { Toaster } from "react-hot-toast";
 function App() {
@@ -26,6 +27,7 @@ function App() {
             <Route path="/" element={<LandingPage />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/dashboard" element={
               <ProtectedRoute><Dashboard /></ProtectedRoute> } />
           </Routes>
