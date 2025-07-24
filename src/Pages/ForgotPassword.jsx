@@ -1,4 +1,3 @@
-"use client"
 
 import { useState } from "react"
 import { sendPasswordResetEmail } from "firebase/auth"
@@ -6,6 +5,7 @@ import { auth } from "../utils/firebaseConfig" // adjust path if needed
 import { toast } from "react-hot-toast"
 import { Mail, ArrowLeft, Loader2 } from "lucide-react"
 import ThemeToggle from "../Components/ThemeToggle"
+import { Link } from "react-router-dom"
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState("")
@@ -18,7 +18,7 @@ const ForgotPassword = () => {
     setIsLoading(true)
     try {
       await sendPasswordResetEmail(auth, email, {
-        url: "http://localhost:5173/reset-password", // change in production
+        url: "https://talesoftheday.vercel.app/reset-password", // change in production
         handleCodeInApp: true,
       })
       toast.success("Reset link sent to your email.")
@@ -40,10 +40,13 @@ const ForgotPassword = () => {
       
       <div className="w-full max-w-md">
         {/* Back button */}
-        <button className="flex items-center text-black dark:text-white hover:text-gray-900 dark:hover:text-gray-200 mb-8 transition-colors">
+        <Link to="/login">
+            <button className="cursor-pointer flex items-center text-black dark:text-white hover:text-gray-900 dark:hover:text-gray-200 mb-8 transition-colors">
           <ArrowLeft className="w-4 h-4 mr-2" />
           Back to login
         </button>
+
+        </Link>
 
         {/* Main card */}
         <div className="bg-white dark:bg-black rounded-2xl shadow-xl border border-gray-100 dark:border-gray-900 p-8 transition-colors duration-300">
