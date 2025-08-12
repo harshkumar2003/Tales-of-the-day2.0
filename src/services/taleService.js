@@ -15,14 +15,36 @@ import { encryptText, decryptText } from "../utils/crypto";
 
 
 // ✅ SAVE ENCRYPTED TALE
+// export const saveEncryptedTale = async (userId, taleData) => {
+//   if (!userId) throw new Error("User not logged in");
+
+//   const encryptedTale = {
+//     title: encryptText(taleData.title),
+//     category: encryptText(taleData.category),
+//     content: encryptText(taleData.content),
+//     timestamp: Timestamp.now(),
+//     userId,
+//   };
+
+//   const talesRef = collection(db, "users", userId, "tales");
+//   await addDoc(talesRef, encryptedTale);
+// };
+
+
 export const saveEncryptedTale = async (userId, taleData) => {
   if (!userId) throw new Error("User not logged in");
+
+  const now = new Date();
+  const istOffsetMs = 5.5 * 60 * 60 * 1000;
+  const istDate = new Date(now.getTime() + istOffsetMs);
+  const dateKeyIST = `${istDate.getFullYear()}-${String(istDate.getMonth() + 1).padStart(2, "0")}-${String(istDate.getDate()).padStart(2, "0")}`;
 
   const encryptedTale = {
     title: encryptText(taleData.title),
     category: encryptText(taleData.category),
     content: encryptText(taleData.content),
     timestamp: Timestamp.now(),
+    dateKey: dateKeyIST, // ✅ precomputed IST date
     userId,
   };
 
